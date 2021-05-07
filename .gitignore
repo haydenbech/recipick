@@ -19,3 +19,5 @@ Homestead.json
 
 # PHPStorm
 /.idea
+
+public/js/app.js
