@@ -5,9 +5,36 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ recipe.name }}
                 </h2>
-                <a :href="route('recipes.edit', recipe)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
-                    Edit
-                </a>
+                <div class="space-x-2">
+                    <jet-danger-button @click="confirmRecipeDeletion">
+                        Delete
+                    </jet-danger-button>
+
+                    <!-- Delete Recipe Confirmation Modal -->
+                    <jet-confirmation-modal :show="confirmingRecipeDeletion" @close="confirmingRecipeDeletion = false">
+                        <template #title>
+                            Delete Recipe
+                        </template>
+
+                        <template #content>
+                            Are you sure you want to delete this recipe?
+                        </template>
+
+                        <template #footer>
+                            <jet-secondary-button @click.native="confirmingRecipeDeletion = false">
+                                Nevermind
+                            </jet-secondary-button>
+
+                            <jet-danger-button class="ml-2" @click.native="deleteRecipe" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Delete Recipe
+                            </jet-danger-button>
+                        </template>
+                    </jet-confirmation-modal>
+
+                    <a :href="route('recipes.edit', recipe)" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                        Edit
+                    </a>
+                </div>
             </div>
         </template>
 
@@ -92,12 +119,42 @@
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
+import JetDangerButton from "@/Jetstream/DangerButton";
+import JetConfirmationModal from "@/Jetstream/ConfirmationModal";
+import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 
 export default {
     props: ['recipe'],
 
     components: {
         AppLayout,
+        JetDangerButton,
+        JetConfirmationModal,
+        JetSecondaryButton,
+    },
+
+    data() {
+        return {
+            confirmingRecipeDeletion: false,
+
+            form: this.$inertia.form(),
+        }
+    },
+    methods: {
+        confirmRecipeDeletion() {
+            this.confirmingRecipeDeletion = true;
+        },
+
+        deleteRecipe() {
+            this.form.delete(route('recipes.destroy', this.recipe), {
+                preserveScroll: true,
+                onSuccess: () => this.closeModal(),
+            })
+        },
+
+        closeModal() {
+            this.confirmingRecipeDeletion = false
+        },
     },
 }
 </script>

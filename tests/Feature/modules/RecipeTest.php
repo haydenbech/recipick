@@ -119,4 +119,19 @@ class RecipeTest extends TestCase
         $response->assertSessionHasNoErrors()
             ->assertRedirect(route('recipes.show', ['recipe' => 1]));
     }
+
+    public function test_user_can_delete_a_recipe(): void
+    {
+        // Arrange
+        $this->actingAs($user = User::factory()->create());
+        $recipe = Recipe::factory()->create();
+
+        // Act
+        $response = $this->delete(route('recipes.destroy', $recipe));
+
+        // Assert
+        $this->assertDeleted($recipe);
+        $response->assertSessionHasNoErrors()
+            ->assertRedirect(route('recipes.index'));
+    }
 }
