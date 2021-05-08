@@ -37,7 +37,9 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::create($request->validated());
 
-        return Redirect::route('recipes.show', [$recipe])->with('success', 'Recipe created.');
+        $this->banner('Recipe created.');
+
+        return Redirect::route('recipes.show', [$recipe]);
     }
 
     /**
@@ -67,7 +69,9 @@ class RecipeController extends Controller
     {
         $recipe->update($request->validated());
 
-        return Redirect::route('recipes.show', [$recipe])->with('success', 'Recipe saved.');
+        $this->banner('Recipe saved.');
+
+        return Redirect::route('recipes.show', [$recipe]);
     }
 
     /**
