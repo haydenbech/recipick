@@ -30,6 +30,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(static function(){
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::resource('recipes', RecipeController::class)->only(['index', 'show']);
+    Route::resource('recipes', RecipeController::class)->except(['destroy']);
 });
 

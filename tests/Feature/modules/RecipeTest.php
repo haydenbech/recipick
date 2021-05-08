@@ -50,4 +50,73 @@ class RecipeTest extends TestCase
             )
         );
     }
+
+    public function test_user_can_view_create_recipe_form(): void
+    {
+        // Arrange
+        $this->actingAs($user = User::factory()->create());
+
+        // Act
+        $response = $this->get(route('recipes.create'));
+
+        // Assert
+        $response->assertOk()
+            ->assertInertia(fn (Assert $page) => $page->component('Recipes/Create'));
+    }
+
+    public function test_user_can_store_a_recipe(): void
+    {
+        // Arrange
+        $this->actingAs($user = User::factory()->create());
+
+        // Act
+        $response = $this->post(route('recipes.store'), [
+            'name'  => 'Butter Chicken',
+        ]);
+
+        // Assert
+        $this->assertDatabaseHas('recipes', [
+            'name'  => 'Butter Chicken',
+        ]);
+        $response->assertSessionHasNoErrors()
+            ->assertRedirect(route('recipes.show', ['recipe' => 1]));
+    }
+
+    public function test_user_can_view_edit_recipe_form(): void
+    {
+        // Arrange
+        $this->actingAs($user = User::factory()->create());
+        $recipe = Recipe::factory()->create();
+
+        // Act
+        $response = $this->get(route('recipes.edit', $recipe));
+
+        // Assert
+        $response->assertOk();
+        $response->assertInertia(fn (Assert $page) => $page->component('Recipes/Edit')
+            ->has('recipe', fn(Assert $page) => $page
+                ->where('name', $recipe->name)
+                ->etc()
+            )
+        );
+    }
+
+    public function test_user_can_update_a_recipe(): void
+    {
+        // Arrange
+        $this->actingAs($user = User::factory()->create());
+        $recipe = Recipe::factory()->create();
+
+        // Act
+        $response = $this->put(route('recipes.update', $recipe), [
+            'name'  => 'Butter Chicken',
+        ]);
+
+        // Assert
+        $this->assertDatabaseHas('recipes', [
+            'name'  => 'Butter Chicken',
+        ]);
+        $response->assertSessionHasNoErrors()
+            ->assertRedirect(route('recipes.show', ['recipe' => 1]));
+    }
 }

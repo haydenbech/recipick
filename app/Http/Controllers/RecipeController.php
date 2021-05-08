@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -21,23 +24,20 @@ class RecipeController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        return Inertia::render('Recipes/Create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RecipeRequest $request): RedirectResponse
     {
-        //
+        $recipe = Recipe::create($request->validated());
+
+        return Redirect::route('recipes.show', [$recipe])->with('success', 'Recipe created.');
     }
 
     /**
@@ -52,25 +52,22 @@ class RecipeController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Recipe  $recipe
-     * @return \Illuminate\Http\Response
      */
-    public function edit(Recipe $recipe)
+    public function edit(Recipe $recipe): Response
     {
-        //
+        return Inertia::render('Recipes/Edit', [
+            'recipe'   => $recipe,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Recipe  $recipe
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recipe $recipe)
+    public function update(RecipeRequest $request, Recipe $recipe): RedirectResponse
     {
-        //
+        $recipe->update($request->validated());
+
+        return Redirect::route('recipes.show', [$recipe])->with('success', 'Recipe saved.');
     }
 
     /**

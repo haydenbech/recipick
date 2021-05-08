@@ -11,6 +11,8 @@ class Recipe extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     /**
      * Prepare a date for array / JSON serialization.
      *
