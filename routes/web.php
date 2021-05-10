@@ -26,9 +26,8 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(static function(){
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
 
     Route::resource('recipes', RecipeController::class);
 });
