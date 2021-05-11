@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\RecipeItemController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,5 +31,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(static function(){
     Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
 
     Route::resource('recipes', RecipeController::class);
+    Route::resource('recipes.items', RecipeItemController::class)->only(['store', 'update', 'destroy']);
 });
 

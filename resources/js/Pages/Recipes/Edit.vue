@@ -9,7 +9,11 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
 
-                <RecipeForm :recipe="recipe" />
+                <RecipeForm id="summary" :recipe="recipe" />
+
+                <jet-section-border />
+
+                <RecipeItemsForm id="ingredients" :recipe="recipe" class="mt-10" />
 
             </div>
         </div>
@@ -18,12 +22,16 @@
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
+import JetSectionBorder from "@/Jetstream/SectionBorder";
 import RecipeForm from "@/Pages/Recipes/RecipeForm";
+import RecipeItemsForm from "@/Pages/Recipes/RecipeItemsForm";
 
 export default {
     components: {
         RecipeForm,
         AppLayout,
+        JetSectionBorder,
+        RecipeItemsForm,
     },
     props: ['recipe']
 }
