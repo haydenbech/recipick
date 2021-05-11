@@ -21,15 +21,29 @@
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
 
+            <!-- Servings -->
+            <div class="col-span-6 sm:col-span-2">
+                <jet-label for="servings" value="Servings" />
+
+                <div class="mt-1 flex rounded-md shadow-sm">
+                    <input id="servings" type="number" min="1" max="8" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 shadow-sm    block w-full flex-1 rounded-none rounded-l-md" v-model="form.servings" autocomplete="servings">
+                    <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                    people
+                    </span>
+                </div>
+
+                <jet-input-error :message="form.errors.servings" class="mt-2" />
+            </div>
+
             <!-- Description -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-6">
                 <jet-label for="description" value="Description" />
                 <jet-input id="description" type="text" class="mt-1 block w-full" v-model="form.description" />
                 <jet-input-error :message="form.errors.description" class="mt-2" />
             </div>
 
             <!-- Preparation Time -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-3">
                 <jet-label for="preparation_time" value="Preparation Time" />
 
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -43,7 +57,7 @@
             </div>
 
             <!-- Cooking Time -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-3">
                 <jet-label for="cooking_time" value="Cooking Time" />
 
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -56,22 +70,8 @@
                 <jet-input-error :message="form.errors.cooking_time" class="mt-2" />
             </div>
 
-            <!-- Servings -->
-            <div class="col-span-6 sm:col-span-4">
-                <jet-label for="servings" value="Servings" />
-
-                <div class="mt-1 flex rounded-md shadow-sm">
-                    <input id="servings" type="number" min="1" max="8" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 shadow-sm    block w-full flex-1 rounded-none rounded-l-md" v-model="form.servings" autocomplete="servings">
-                    <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                    people
-                    </span>
-                </div>
-
-                <jet-input-error :message="form.errors.servings" class="mt-2" />
-            </div>
-
             <!-- Effort -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-3">
                 <jet-label for="effort" value="Effort" />
 
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -85,7 +85,7 @@
             </div>
 
             <!-- Rating -->
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-3">
                 <jet-label for="rating" value="Rating" />
 
                 <div class="mt-1 flex rounded-md shadow-sm">
