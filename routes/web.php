@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MealPlanController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\RecipeItemController;
 use Illuminate\Foundation\Application;
@@ -32,5 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(static function(){
 
     Route::resource('recipes', RecipeController::class);
     Route::resource('recipes.items', RecipeItemController::class)->only(['store', 'update', 'destroy']);
+
+    Route::resource('mealPlans', MealPlanController::class);
 });
 

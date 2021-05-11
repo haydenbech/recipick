@@ -23,6 +23,9 @@
                                 <jet-nav-link :href="route('recipes.index')" :active="route().current('recipes.index')">
                                     Recipes
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('mealPlans.index')" :active="route().current('mealPlans.index')">
+                                    Meal Plans
+                                </jet-nav-link>
                             </div>
                         </div>
 
