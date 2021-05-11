@@ -79,7 +79,7 @@ class RecipeTest extends TestCase
             'name'  => 'Butter Chicken',
         ]);
         $response->assertSessionHasNoErrors()
-            ->assertRedirect(route('recipes.show', ['recipe' => 1]));
+            ->assertRedirect(route('recipes.show', ['recipe' => Recipe::value('id')]));
     }
 
     public function test_user_can_view_edit_recipe_form(): void
@@ -117,7 +117,7 @@ class RecipeTest extends TestCase
             'name'  => 'Butter Chicken',
         ]);
         $response->assertSessionHasNoErrors()
-            ->assertRedirect(route('recipes.show', ['recipe' => 1]));
+            ->assertRedirect(route('recipes.show', ['recipe' => $recipe->id]));
     }
 
     public function test_user_can_delete_a_recipe(): void
