@@ -23,7 +23,7 @@
 
             <!-- Servings -->
             <div class="col-span-6 sm:col-span-2">
-                <jet-label for="servings" value="Servings" />
+                <jet-label for="servings" value="Serves" />
 
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <input id="servings" type="number" min="1" max="8" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 shadow-sm    block w-full flex-1 rounded-none rounded-l-md" v-model="form.servings" autocomplete="servings">
