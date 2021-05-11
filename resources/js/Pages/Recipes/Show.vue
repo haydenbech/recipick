@@ -112,6 +112,26 @@
                     </div>
                 </div>
 
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-10">
+                    <div class="px-4 py-5 sm:px-6">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Ingredients
+                        </h3>
+
+                        <ul v-if="recipe.items.length > 0" class="mt-1 max-w-2xl text-sm text-gray-500">
+                            <li v-for="item in recipe.items" class="mb-2">
+                                {{ item.quantity }}{{ item.unit }} {{ item.ingredient.name }}, {{ item.preparation }}
+                            </li>
+                        </ul>
+                        <p v-else class="mt-1 max-w-2xl text-sm text-gray-500">
+                            No ingredients yet. <br>
+                            <a :href="route('recipes.edit', recipe)+'#ingredients'" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-2">
+                                Add Ingredients
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </app-layout>

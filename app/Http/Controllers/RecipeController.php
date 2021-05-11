@@ -46,6 +46,8 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe): Response
     {
+        $recipe->load(['items', 'items.ingredient']);
+
         return Inertia::render('Recipes/Show', [
             'recipe'   => $recipe,
         ]);
